@@ -27,7 +27,7 @@ class Solution:
 
         """
         nums.sort()
-        closest_sum = float('inf')
+        closest_sum = nums[0] + nums[1] + nums[2]
         n = len(nums)
 
         for i, num in enumerate(nums[:-2]):
@@ -35,20 +35,16 @@ class Solution:
             # Hold i constant and Use 2-pointer to find closest difference
             while left < right:
                 curr_sum = nums[i] + nums[left] + nums[right]
-
-                # Update if closer difference found
+                # Update output, if closer difference found
                 if abs(target-curr_sum) < abs(target-closest_sum):
-                    print(num, nums[left], nums[right])
                     closest_sum = curr_sum
-
                 # Search for next closer difference
                 if curr_sum < target:
                     left += 1
                 elif curr_sum > target:
                     right -= 1
-
                 # Found triplet that equals target
                 else:
-                    return 0
+                    return closest_sum
 
-        return -1 if closest_sum == float('inf') else int(closest_sum)
+        return closest_sum
